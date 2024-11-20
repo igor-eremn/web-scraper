@@ -1,24 +1,29 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://webscraper.io/test-sites/e-commerce/allinone"
+url = "https://www.bmw.ca/en/all-models.html"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
 section_titles = []
 
-for header in soup.find_all(['h2', 'h3']):
+for header in soup.find_all(['h2']):
     section_titles.append(header.get_text(strip=True))
 
 for title in section_titles:
     print(title)
 
 print('-' * 50)
-section_header = soup.find('h3', string="Top items being scraped right now")
+section_header = soup.find('div', attrs={'data-group-name': 'Sedan'})
 
 if section_header:
-    parent_section = section_header.find_parent()
+    titles = section_header.find_all(['h5'])  # Adjust this based on how titles are structured in your page
 
+    # Loop through the titles and print them
+    for title in titles:
+        print(title.get_text(strip=True)) 
+
+    parent_section = section_header.find_parent()
     row_section = parent_section.find('div', class_='row')
 
     if row_section:
