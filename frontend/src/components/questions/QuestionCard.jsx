@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card'
 
 const QuestionCard = ({ index, question }) => {
   return (
