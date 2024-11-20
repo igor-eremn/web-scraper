@@ -1,18 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://apple.com"
+url = "https://webscraper.io/test-sites/e-commerce/allinone"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
-
-#title
-#print(soup.title.text)
-
-#text
-#print(soup.get_text())
-
-#tags
-#print(soup.find('h'))
 
 #all sections
 section_titles = []
@@ -22,3 +13,13 @@ for header in soup.find_all(['h2', 'h3']):
 
 for title in section_titles:
     print(title)
+
+section_header = soup.find('h3', string=lambda text: text and 'Top items being scraped right now' in text)
+
+if section_header:
+    parent_section = section_header.find_parent()
+    text_under_section = parent_section.get_text(strip=True)
+
+    print(text_under_section)
+else:
+    print("Section header not found.")
