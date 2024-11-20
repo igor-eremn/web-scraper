@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, CheckCircle } from 'lucide-react';
-import { StatusAlert } from './StatusAlert';
+import StatusAlert from './StatusAlert';
 
 const UrlInput = ({ url, setUrl, isLoading, handleAnalyze, scrapeStatus }) => {
   return (
